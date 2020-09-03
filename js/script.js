@@ -13,45 +13,21 @@
 
 $(document).ready(function(){
 
-    //dichiarazione e assegnazione variabili
-    function start() {
-        image = $("img.active");
-        pointsIndex = $(".fa-circle.active");
-        image.removeClass("active");
-        pointsIndex.removeClass("active");
-    }
+   
     
-    //funzione freccia indietro
-    $(".prev").click(
-        function () {
-            start();
-            
-            if (image.hasClass("first")) {
-                $("img.last").addClass("active");
-                $(".fa-circle.last").addClass("active");
-            } else {
-                image.prev().addClass("active");
-                pointsIndex.prev().addClass("active");
-            };
-        }
-    );
+    //freccia indietro
+    $(".prev").click(function() {
+        prevImage();
+    });
+      
 
+    //freccia avanti
+    $(".next").click(function() {
+        nextImage();
+    });
 
-    //funzione freccia avanti
-    $(".next").click(
-        function () {
-            start();
-            
-            if (image.hasClass("last")) {
-                $("img.first").addClass("active");
-                $(".fa-circle.first").addClass("active");
-            } else {
-                image.next().addClass("active");
-                pointsIndex.next().addClass("active");
-            }
-        }
+       
         
-    );
 
 
     //funzione pallini
@@ -69,7 +45,69 @@ $(document).ready(function(){
             $("img").eq(pointsIndex).addClass("active");
         
         }
-    )
+    );
 
+
+    //funzione pressione freccette tastiera
+    $(document).keydown(function(e) {
+
+        var tastoPremuto = e.which;
+        var frecciaDestra = 39;
+        var frecciaSinistra = 37;
+    
+        switch(tastoPremuto) {
+    
+          case frecciaDestra:
+            nextImage();
+            break;
+          case frecciaSinistra:
+            prevImage();
+            break;
+        }
+    
+      });
+    
+
+
+
+
+
+
+
+      /////funzioni/////
+      
+       //dichiarazione e assegnazione variabili
+        function start() {
+            image = $("img.active");
+            pointsIndex = $(".fa-circle.active");
+            image.removeClass("active");
+            pointsIndex.removeClass("active");
+        };
+
+        //funzione immagine successiva
+        function prevImage() {
+            start();
+            
+            if (image.hasClass("first")) {
+                $("img.last").addClass("active");
+                $(".fa-circle.last").addClass("active");
+            } else {
+                image.prev().addClass("active");
+                pointsIndex.prev().addClass("active");
+            };
+        };      
+        
+        //funzione immagine successiva
+        function nextImage() {
+            start();
+            
+            if (image.hasClass("last")) {
+                $("img.first").addClass("active");
+                $(".fa-circle.first").addClass("active");
+            } else {
+                image.next().addClass("active");
+                pointsIndex.next().addClass("active");
+            }
+        };
 }
 );
